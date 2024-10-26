@@ -1,0 +1,16 @@
+{
+  "name": "siyuan2directus",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@directus/sdk": "^17.0.2",
+    "@swc/cli": "^0.4.1-nightly.20240914",
+    "@swc/core": "^1.7.40",
+    "@types/bun": "latest",
+    "date-fns": "^4.1.0",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
