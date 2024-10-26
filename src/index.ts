@@ -69,7 +69,9 @@ export const syncBlocks = async () => {
 			};
 			const safe_res = blog_post_schema.parse(res);
 			const raw = await syncPost(safe_res);
+            console.log(raw)
 			const dire_res = blog_post_schema.parse(raw);
+            console.log(dire_res)
 			const cols = [
 				"slug",
 				"status",
@@ -78,7 +80,7 @@ export const syncBlocks = async () => {
 				"lang",
 			] as (keyof BlogPost)[];
 			const ret_attrs = Object.fromEntries(
-				cols.map((x, _) => [`custom-directus-${x}`, dire_res[x]]),
+				cols.map((x, _) => [`custom-directus-${x}`, dire_res[x]?.toString()??""]),
 			);
 			const new_attrs = {
 				...ret_attrs,
@@ -86,6 +88,7 @@ export const syncBlocks = async () => {
 				"custom-directus-tags": dire_res.tags.join(", "),
 				"custom-description": dire_res.description,
 			};
+            console.log(new_attrs)
 			await client.setBlockAttrs({ id: x.id, attrs: new_attrs });
             count += 1
 		}),
@@ -95,3 +98,4 @@ export const syncBlocks = async () => {
 };
 
 console.log(await syncBlocks());
+process.exit(0);
